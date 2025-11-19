@@ -21,7 +21,7 @@ class AppColor {
   static const Color bgInput = Color(0xFFF0F0F0);       // Nền ô nhập
 
   // ✍️ Bộ màu chữ
-  static const Color textPrimary = Color(0xFF212121);   // Chữ chính
+  static const Color textPrimary = Color(0xFF1B51A3);   // Chữ chính
   static const Color textSecondary = Color(0xFF757575); // Chữ phụ
   static const Color textDisabled = Color(0xFFBDBDBD);  // Chữ vô hiệu hóa
 

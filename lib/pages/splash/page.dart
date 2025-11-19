@@ -1,5 +1,9 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
-import '../../widgets/thien_tam_logo.dart';
+import 'package:thientammedicalapp/Component/ProgressBar.dart';
+import 'package:thientammedicalapp/Value/app_color.dart';
+import '../../Component/Logo.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
@@ -13,6 +17,7 @@ class _SplashPageState extends State<SplashPage>
   late AnimationController _controller;
   late Animation<double> _fadeAnimation;
   late Animation<double> _scaleAnimation;
+  late double _indexProcessBar = 0;
 
   @override
   void initState() {
@@ -39,6 +44,18 @@ class _SplashPageState extends State<SplashPage>
     ));
 
     _controller.forward();
+
+    Timer.periodic(Duration(milliseconds: 400), (timer) {
+      setState(() {
+        _indexProcessBar += 0.18;
+
+        if (_indexProcessBar >= 1) {
+          _indexProcessBar = 1;
+          timer.cancel();                 // dừng lại -> hoàn tất
+          Future.delayed(Duration(milliseconds: 400), _navigateToLogin);
+        }
+      });
+    });
   }
 
   @override
@@ -82,41 +99,30 @@ class _SplashPageState extends State<SplashPage>
                               size: logoSize.clamp(180.0, 220.0),
                               showText: true,
                             ),
-                            SizedBox(height: constraints.maxHeight * 0.06),
-                            // Nút chuyển đến màn hình login
-                            SizedBox(
-                              width: constraints.maxWidth * 0.84,
-                              height: 52,
-                              child: ElevatedButton(
-                                onPressed: _navigateToLogin,
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: const Color(0xFF1B4D4A),
-                                  foregroundColor: Colors.white,
-                                  elevation: 3,
-                                  shadowColor: Colors.black26,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(26),
-                                  ),
-                                  textStyle: TextStyle(
-                                    fontSize: screenSize.width * 0.045 > 18 ? 18 : screenSize.width * 0.045,
-                                    fontWeight: FontWeight.w600,
-                                    letterSpacing: 0.5,
-                                  ),
-                                ),
-                                child: const Text('Bắt Đầu'),
-                              ),
-                            ),
-                            SizedBox(height: constraints.maxHeight * 0.025),
                             // Text mô tả
                             Text(
-                              'Chào mừng đến với THIÊN TÂM',
+                              'Quản lý kho dễ dàng – Hiệu quả mỗi ngày',
                               textAlign: TextAlign.center,
                               style: TextStyle(
-                                fontSize: screenSize.width * 0.038 > 15 ? 15 : screenSize.width * 0.038,
-                                color: Colors.grey[700],
+                                fontSize: 18,
+                                color: AppColor.textPrimary,
                                 fontWeight: FontWeight.w500,
                               ),
                             ),
+                            SizedBox(height: constraints.maxHeight * 0.02),
+                            Row(
+                              children: [
+                                const SizedBox(width: 10), // khoảng cách
+                                Expanded(
+                                  child: ProgressBar(
+                                    value: _indexProcessBar,
+                                    duration: Duration(seconds: 1),
+                                  ),
+                                ),
+                              ],
+                            )
+
+
                           ],
                         ),
                       ),
