@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:thientammedicalapp/models/nhanvien.dart';
 import 'package:thientammedicalapp/responsity/LoginReponsity.dart';
+import 'package:thientammedicalapp/services/api_service.dart';
 import '../../Component/Logo.dart';
 import '../../Value/app_assets.dart';
 
@@ -37,6 +38,8 @@ class _LoginPageState extends State<LoginPage> {
       //NV891
       //matkhauMoiCuaToi123
       _accesskey = await accessToken(manv, matkhau);
+      await ApiService.init();
+
       // Simulate login process
       Future.delayed(const Duration(seconds: 2), () {
         setState(() {
@@ -260,7 +263,7 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                             const SizedBox(width: 8),
                             const Text(
-                              'Tôi đồng ý với điều khoản',
+                              'Ghi nhớ thông tin',
                               style: TextStyle(fontSize: 14),
                             ),
                           ],
