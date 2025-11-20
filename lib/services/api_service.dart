@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:thientammedicalapp/Value/app_http.dart';
+import 'package:thientammedicalapp/Value/share_keys.dart';
 
 class ApiService {
   static final Dio dio = Dio(
@@ -14,7 +15,7 @@ class ApiService {
   // Khởi tạo interceptor để gắn token
   static Future<void> init() async {
     final prefs = await SharedPreferences.getInstance();
-    String? token = prefs.getString("access_token");
+    String? token = prefs.getString(ShareKeys.TokenKey);
 
     dio.interceptors.clear();
     dio.interceptors.add(

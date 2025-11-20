@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:thientammedicalapp/pages/main/page.dart';
 import 'pages/splash/page.dart';
 import 'pages/login/page.dart';
 
@@ -23,6 +24,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/splash': (context) => const SplashPage(),
         '/login': (context) => const LoginPage(),
+        '/main': (context) => const MainPage(),
       },
     );
   }

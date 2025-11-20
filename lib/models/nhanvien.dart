@@ -1,5 +1,5 @@
 class NhanVien {
-  final int maNV;
+  final String maNV;
   final String tenNhanVien;
   final String ngaySinh;      // bạn đang lưu String (dd/MM/yyyy hay yyyy-MM-dd)
   final String ngayVaoLam;    // tương tự
@@ -22,11 +22,11 @@ class NhanVien {
   // Dùng khi lấy dữ liệu từ API (json)
   factory NhanVien.fromJson(Map<String, dynamic> json) {
     return NhanVien(
-      maNV: json['maNV'] as int,
+      maNV: json['maNV'] as String,
       tenNhanVien: json['tenNhanVien'] as String,
       ngaySinh: json['ngaySinh'] as String,
       ngayVaoLam: json['ngayVaoLam'] as String,
-      matKhau: json['matKhau'] as String,
+      matKhau: json['matKhau'] ?? '',
       sdt: json['SDT'] as String,
       phongBan: json['PhongBan'] as int,
       isDelete: (json['isDelete'] as int) == 1,
@@ -49,7 +49,7 @@ class NhanVien {
 
   // Dùng khi muốn sửa 1-2 trường mà giữ nguyên các trường khác
   NhanVien copyWith({
-    int? maNV,
+    String? maNV,
     String? tenNhanVien,
     String? ngaySinh,
     String? ngayVaoLam,

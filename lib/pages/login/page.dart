@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:thientammedicalapp/control/ControlSharePreference.dart';
 import 'package:thientammedicalapp/models/nhanvien.dart';
+import 'package:thientammedicalapp/models/userLogin.dart';
 import 'package:thientammedicalapp/responsity/LoginReponsity.dart';
+import 'package:thientammedicalapp/responsity/NhanVienReponsity.dart';
 import 'package:thientammedicalapp/services/api_service.dart';
 import '../../Component/Logo.dart';
 import '../../Value/app_assets.dart';
@@ -18,7 +21,7 @@ class _LoginPageState extends State<LoginPage> {
   final _passwordController = TextEditingController();
   bool _obscurePassword = true;
   bool _isLoading = false;
-  bool _isChecked = false;
+  bool _isRemeberme = false;
   late bool _accesskey ;
 
   @override
@@ -38,7 +41,20 @@ class _LoginPageState extends State<LoginPage> {
       //NV891
       //matkhauMoiCuaToi123
       _accesskey = await accessToken(manv, matkhau);
-      await ApiService.init();
+      if (_accesskey) {
+        await ApiService.init();
+        //Lưu nhân viên khi lấy ra
+        NhanVien nhanVien = await getNhanVienByID(manv);
+        nhanVien.copyWith(matKhau: matkhau);
+        await saveNhanVienSharedPreferences(nhanVien);
+
+        await deleteUserLogin();
+        if (_isRemeberme) { //Nếu lưu thông tin sẽ Save tài khoảng lại cho lần đăng nhập kế tiếp
+          UserLogin userLogin = new UserLogin(taiKhoang: manv, matKhau: matkhau,rememberMe: true);
+          saveUserLogin(userLogin);
+        }
+      }
+
 
       // Simulate login process
       Future.delayed(const Duration(seconds: 2), () {
@@ -52,6 +68,10 @@ class _LoginPageState extends State<LoginPage> {
           ),
         );
       });
+      if (_accesskey) {
+         Navigator.pushReplacementNamed(context, '/main');
+      }
+
     }
   }
 
@@ -59,10 +79,10 @@ class _LoginPageState extends State<LoginPage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    setState(() {
-      _userIDController.text ='NV891';
-      _passwordController.text='matkhauMoiCuaToi123';
-    });
+
+    _userIDController.text ='NV891';
+    _passwordController.text='matkhauMoiCuaToi123';
+
 
   }
 
@@ -253,10 +273,10 @@ class _LoginPageState extends State<LoginPage> {
                         Row(
                           children: [
                             Checkbox(
-                              value: _isChecked,
+                              value: _isRemeberme,
                               onChanged: (bool? value) {
                                 setState(() {
-                                  _isChecked = value ?? false;
+                                  _isRemeberme = value ?? false;
                                 });
                               },
                               activeColor: Color(0xFF1B4D4A), // màu khi checked
