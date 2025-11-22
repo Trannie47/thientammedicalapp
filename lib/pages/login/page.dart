@@ -96,7 +96,7 @@ class _LoginPageState extends State<LoginPage> {
         height: screenSize.height,
         decoration:  BoxDecoration(
           image: DecorationImage(
-            image: AssetImage( AppAssets.imagesPath +"bgLogin.png"),
+            image: AssetImage( AppAssets.bgLogin),
             fit: BoxFit.cover,
             opacity: 0.8,             // tuỳ chọn: làm mờ nền một chút cho chữ dễ đọc
           ),

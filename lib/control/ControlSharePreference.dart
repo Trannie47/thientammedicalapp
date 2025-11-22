@@ -33,6 +33,22 @@ Future<void> saveNhanVienSharedPreferences(NhanVien nhanvien) async {
   await prefs.setString(ShareKeys.nhanVien, nhanvienJson);
 }
 
+Future<NhanVien?> getProfileMe() async {
+  try {
+    final prefs = await SharedPreferences.getInstance();
+    final String? jsonString = prefs.getString(ShareKeys.nhanVien);
+
+    if (jsonString == null || jsonString.isEmpty) {
+      return null; // chưa đăng nhập hoặc chưa lưu
+    }
+
+    final Map<String, dynamic> jsonMap = jsonDecode(jsonString);
+    return NhanVien.fromJson(jsonMap);
+  } catch (e) {
+    return null;
+  }
+}
+
 Future<void> deleteNhanvienSharedPreferences() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
 

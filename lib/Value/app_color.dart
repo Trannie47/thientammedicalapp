@@ -23,7 +23,7 @@ class AppColor {
   // ✍️ Bộ màu chữ
   static const Color textPrimary = Color(0xFF1B51A3);   // Chữ chính
   static const Color textSecondary = Color(0xFF757575); // Chữ phụ
-  static const Color textDisabled = Color(0xFFBDBDBD);  // Chữ vô hiệu hóa
+  static const Color textDisabled = Color(0xFFAFB3B9);  // Chữ vô hiệu hóa
 
   // 🖱️ Bộ màu tương tác
   static const Color hover = Color(0xFFE0E0E0);         // Hover
