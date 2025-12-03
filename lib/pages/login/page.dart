@@ -59,7 +59,7 @@ class _LoginPageState extends State<LoginPage> {
 
 
       // Simulate login process
-      Future.delayed(const Duration(seconds: 2), () {
+      Future.delayed(const Duration(seconds: 1), () {
         setState(() {
           _isLoading = false;
         });
@@ -81,6 +81,11 @@ class _LoginPageState extends State<LoginPage> {
         } else {
           Navigator.pushReplacementNamed(context, '/main');
         }
+      }
+      else {
+        setState(() {
+          _isLoading = false;
+        });
       }
 
     }

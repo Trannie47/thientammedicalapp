@@ -22,6 +22,7 @@ Future<bool> accessToken(String maNV,String matkhau ) async {
     await prefs.setString(ShareKeys.TokenKey, token);
     return true;
   } else {
-    throw Exception("Fail to load");
+    // throw Exception("Fail to load");
+    return false;
   }
 }
