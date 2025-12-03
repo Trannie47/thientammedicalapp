@@ -96,7 +96,8 @@ class _SplashPageState extends State<SplashPage>
                           children: [
                             // Logo THIÊN TÂM
                             ThienTamLogo(
-                              size: logoSize.clamp(180.0, 220.0),
+                              width: 315,
+                              height: 231,
                               showText: true,
                             ),
                             // Text mô tả

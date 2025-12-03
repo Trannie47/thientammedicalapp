@@ -116,7 +116,7 @@ class _LoginPageState extends State<LoginPage> {
                     child: ThienTamLogo(
                       size: logoSize.clamp(120.0, 120.0),
                       height: 135,
-                      width: 185,
+                      width: 184,
                     ),
                   ),
                   SizedBox(height: screenSize.height * 0.30),
