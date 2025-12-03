@@ -1,12 +1,13 @@
 class NhanVien {
   final String maNV;
   final String tenNhanVien;
-  final String ngaySinh;      // bạn đang lưu String (dd/MM/yyyy hay yyyy-MM-dd)
-  final String ngayVaoLam;    // tương tự
+  final String ngaySinh; // bạn đang lưu String (dd/MM/yyyy hay yyyy-MM-dd)
+  final String ngayVaoLam; // tương tự
   final String matKhau;
   final String sdt;
   final int phongBan;
-  final bool isDelete;        // tinyint(1) → bool trong Dart
+  final bool mustChangePassword;
+  final bool isDelete; // tinyint(1) → bool trong Dart
 
   const NhanVien({
     required this.maNV,
@@ -16,6 +17,7 @@ class NhanVien {
     required this.matKhau,
     required this.sdt,
     required this.phongBan,
+    this.mustChangePassword = false,
     this.isDelete = false, // mặc định chưa xóa
   });
 
@@ -29,6 +31,7 @@ class NhanVien {
       matKhau: json['matKhau'] ?? '',
       sdt: json['SDT'] as String,
       phongBan: json['PhongBan'] as int,
+      mustChangePassword: (json['mustChangePassword'] as int) == 1,
       isDelete: (json['isDelete'] as int) == 1,
     );
   }
@@ -43,6 +46,7 @@ class NhanVien {
       'matKhau': matKhau,
       'SDT': sdt,
       'PhongBan': phongBan,
+      'mustChangePassword': mustChangePassword ? 1 : 0,
       'isDelete': isDelete ? 1 : 0,
     };
   }
@@ -56,6 +60,7 @@ class NhanVien {
     String? matKhau,
     String? sdt,
     int? phongBan,
+    bool? mustChangePassword,
     bool? isDelete,
   }) {
     return NhanVien(
@@ -66,6 +71,7 @@ class NhanVien {
       matKhau: matKhau ?? this.matKhau,
       sdt: sdt ?? this.sdt,
       phongBan: phongBan ?? this.phongBan,
+      mustChangePassword : mustChangePassword ?? this.mustChangePassword,
       isDelete: isDelete ?? this.isDelete,
     );
   }

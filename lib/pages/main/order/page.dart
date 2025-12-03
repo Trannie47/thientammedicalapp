@@ -119,7 +119,7 @@ class _OrderPageState extends State<OrderPage> {
           message,
           style: const TextStyle(
             fontSize: 20,
-            color: Colors.black,
+            color: AppColor.textPrimary,
           ),
         ),
       ],

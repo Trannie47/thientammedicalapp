@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:thientammedicalapp/control/ControlSharePreference.dart';
 import 'package:thientammedicalapp/models/nhanvien.dart';
 import 'package:thientammedicalapp/models/userLogin.dart';
+import 'package:thientammedicalapp/pages/main/about/changepassword/page.dart';
 import 'package:thientammedicalapp/responsity/LoginReponsity.dart';
 import 'package:thientammedicalapp/responsity/NhanVienReponsity.dart';
 import 'package:thientammedicalapp/services/api_service.dart';
@@ -38,13 +39,14 @@ class _LoginPageState extends State<LoginPage> {
       });
       String manv = _userIDController.text;
       String matkhau = _passwordController.text;
+      late NhanVien nhanVien;
       //NV891
       //matkhauMoiCuaToi123
       _accesskey = await accessToken(manv, matkhau);
       if (_accesskey) {
         await ApiService.init();
         //Lưu nhân viên khi lấy ra
-        NhanVien nhanVien = await getNhanVienByID(manv);
+        nhanVien = await getNhanVienByID(manv);
         nhanVien.copyWith(matKhau: matkhau);
         await saveNhanVienSharedPreferences(nhanVien);
 
@@ -69,7 +71,16 @@ class _LoginPageState extends State<LoginPage> {
         );
       });
       if (_accesskey) {
-         Navigator.pushReplacementNamed(context, '/main');
+        if (nhanVien.mustChangePassword) {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => ChangePasswordScreen(isFirstPass: true),
+            ),
+          );
+        } else {
+          Navigator.pushReplacementNamed(context, '/main');
+        }
       }
 
     }
@@ -114,17 +125,12 @@ class _LoginPageState extends State<LoginPage> {
                   // Logo THIÊN TÂM
                   Center(
                     child: ThienTamLogo(
-                      size: logoSize.clamp(120.0, 120.0),
-<<<<<<< HEAD
-                      height: 120,
-                      width: 185,
-=======
-                      height: 135,
-                      width: 184,
->>>>>>> 859dd46efcec4846516c5318d46d22b72389dfe9
+                       size: logoSize.clamp(120.0, 120.0),
+                      height: 100,
+                      width: 165,
                     ),
                   ),
-                  SizedBox(height: screenSize.height * 0.30),
+                  SizedBox(height: screenSize.height * 0.35),
 
                   // Email field
                   Container(
