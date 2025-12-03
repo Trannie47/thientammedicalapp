@@ -49,8 +49,8 @@ class _LoginPageState extends State<LoginPage> {
         await saveNhanVienSharedPreferences(nhanVien);
 
         await deleteUserLogin();
-        if (_isRemeberme) { //Nếu lưu thông tin sẽ Save tài khoảng lại cho lần đăng nhập kế tiếp
-          UserLogin userLogin = new UserLogin(taiKhoang: manv, matKhau: matkhau,rememberMe: true);
+        if (_isRemeberme) { //Nếu lưu thông tin sẽ Save tài khoản lại cho lần đăng nhập kế tiếp
+          UserLogin userLogin = new UserLogin(taiKhoan: manv, matKhau: matkhau,rememberMe: true);
           saveUserLogin(userLogin);
         }
       }
@@ -115,7 +115,7 @@ class _LoginPageState extends State<LoginPage> {
                   Center(
                     child: ThienTamLogo(
                       size: logoSize.clamp(120.0, 120.0),
-                      height: 135,
+                      height: 120,
                       width: 185,
                     ),
                   ),

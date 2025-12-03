@@ -1,10 +1,10 @@
 class UserLogin {
-  final String taiKhoang;
+  final String taiKhoan;
   final String matKhau;
   final bool rememberMe;
 
   const UserLogin({
-    required this.taiKhoang,
+    required this.taiKhoan,
     required this.matKhau,
     this.rememberMe = false,
   });
@@ -12,7 +12,7 @@ class UserLogin {
   // Lấy dữ liệu từ JSON (từ API hoặc local storage)
   factory UserLogin.fromJson(Map<String, dynamic> json) {
     return UserLogin(
-      taiKhoang: json['taiKhoang'] as String,
+      taiKhoan: json['taiKhoan'] as String,
       matKhau: json['matKhau'] as String,
       rememberMe: (json['rememberMe'] as int?) == 1, // tinyint(1)
     );
@@ -21,7 +21,7 @@ class UserLogin {
   // Convert ngược lại để lưu vào server hoặc SharedPreferences
   Map<String, dynamic> toJson() {
     return {
-      'maNV': taiKhoang,
+      'maNV': taiKhoan,
       'tenNhanVien': matKhau,
       'rememberMe': rememberMe ? 1 : 0,
     };
@@ -34,7 +34,7 @@ class UserLogin {
     bool? rememberMe,
   }) {
     return UserLogin(
-      taiKhoang: taiKhoang ?? this.taiKhoang,
+      taiKhoan: taiKhoang ?? this.taiKhoan,
       matKhau: matKhau ?? this.matKhau,
       rememberMe: rememberMe ?? this.rememberMe,
     );
@@ -42,6 +42,6 @@ class UserLogin {
 
   @override
   String toString() {
-    return 'UserLogin(taiKhoang: $taiKhoang, matKhau: $matKhau, rememberMe: $rememberMe)';
+    return 'UserLogin(taiKhoan: $taiKhoan, matKhau: $matKhau, rememberMe: $rememberMe)';
   }
 }

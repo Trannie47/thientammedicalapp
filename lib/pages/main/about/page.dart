@@ -159,7 +159,7 @@ class _AboutPageState extends State<AboutPage> {
                     ),
                   ),
                 ),
-                _infoItem(Icons.badge_outlined, "Phòng Ban", "${NamePhongBan[_phongBan ?? 0]}"),
+                _infoItem(Icons.badge_outlined, "Phòng Ban", "${NamePhongBan[0]}"),
                 Center(
                   child: Container(
                     height: 1,
