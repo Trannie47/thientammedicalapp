@@ -115,8 +115,13 @@ class _LoginPageState extends State<LoginPage> {
                   Center(
                     child: ThienTamLogo(
                       size: logoSize.clamp(120.0, 120.0),
+<<<<<<< HEAD
                       height: 120,
                       width: 185,
+=======
+                      height: 135,
+                      width: 184,
+>>>>>>> 859dd46efcec4846516c5318d46d22b72389dfe9
                     ),
                   ),
                   SizedBox(height: screenSize.height * 0.30),
